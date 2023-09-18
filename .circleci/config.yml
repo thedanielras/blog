@@ -24,6 +24,9 @@ jobs:
       - run:
           name: "check"
           command: "ls"
+      - store_artifacts:
+          path: /dist
+          destination: dist
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
