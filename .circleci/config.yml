@@ -20,10 +20,13 @@ jobs:
           command: "mkdir -p /dist"
       - run:
           name: "build"
-          command: "hugo --destination /dist"
+          command: "hugo --destination dist"
       - run:
           name: "check"
           command: "ls"
+      - run:
+          name: Compress Artifacts
+          command: tar -cvzf /dist/dist.tar dist
       - store_artifacts:
           path: /dist
           destination: dist
