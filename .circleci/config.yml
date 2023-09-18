@@ -9,7 +9,7 @@ jobs:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: klakegg/hugo:0.101.0
+      - image: klakegg/hugo:0.111.3-ubuntu-ci
     working_directory: "/src"
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: "build"
-          command: "hugo"
+          command: "hugo ."
       - run:
           name: "check"
           command: "ls"
