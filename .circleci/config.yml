@@ -16,8 +16,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "prepare"
+          command: "mkdir -p /dist"
+      - run:
           name: "build"
-          command: "hugo ."
+          command: "hugo --destination /dist"
       - run:
           name: "check"
           command: "ls"
