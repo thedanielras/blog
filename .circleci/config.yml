@@ -36,7 +36,7 @@ jobs:
           command: apk add --update docker openrc
       - run:
           name: "set version"
-          command: timestamp=$(date +%Y%m%d%H%M%S) 
+          command: export timestamp=$(date +%Y%m%d%H%M%S) 
       - run:
           name: "build image"
           command: "docker build --tag registry.danielras.com:5443/blog:$timestamp ."
