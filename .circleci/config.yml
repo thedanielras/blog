@@ -32,13 +32,13 @@ jobs:
       #     path: /dist
       #     destination: dist
       - run
-          name: set version
+          name: "set version"
           command: timestamp=$(date +%Y%m%d%H%M%S) 
       - run
-          name: build image
+          name: "build image"
           command: "docker build --tag registry.danielras.com:5443/blog:$timestamp ."
       - deploy:
-          name: Push application Docker image
+          name: "Push application Docker image"
           command: |
             docker push registry.danielras.com:5443/blog:$timestamp
 
