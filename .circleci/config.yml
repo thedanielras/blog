@@ -37,7 +37,7 @@ jobs:
       - run:
           name: "set version"
           command: | 
-            exho 'export timestamp=$(date +%Y%m%d%H%M%S)'
+            echo 'export timestamp=$(date +%Y%m%d%H%M%S)'
             source "$BASH_ENV"
       - run:
           name: "build image"
