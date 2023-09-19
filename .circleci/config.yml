@@ -31,10 +31,10 @@ jobs:
       # - store_artifacts:
       #     path: /dist
       #     destination: dist
-      - run
+      - run:
           name: "set version"
           command: timestamp=$(date +%Y%m%d%H%M%S) 
-      - run
+      - run:
           name: "build image"
           command: "docker build --tag registry.danielras.com:5443/blog:$timestamp ."
       - deploy:
