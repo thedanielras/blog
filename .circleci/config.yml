@@ -15,6 +15,7 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: "prepare"
           command: "mkdir -p /dist"
@@ -23,13 +24,23 @@ jobs:
           command: "hugo --destination dist"
       - run:
           name: "check"
-          command: "ls"
-      - run:
-          name: Compress Artifacts
-          command: tar -cvzf /dist/dist.tar dist
-      - store_artifacts:
-          path: /dist
-          destination: dist
+          command: "ls dist"
+      # - run:
+      #     name: Compress Artifacts
+      #     command: tar -cvzf /dist/dist.tar dist
+      # - store_artifacts:
+      #     path: /dist
+      #     destination: dist
+      - run
+          name: set version
+          command: timestamp=$(date +%Y%m%d%H%M%S) 
+      - run
+          name: build image
+          command: "docker build --tag registry.danielras.com:5443/blog:$timestamp ."
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker push registry.danielras.com:5443/blog:$timestamp
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
