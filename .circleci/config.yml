@@ -32,6 +32,9 @@ jobs:
       #     path: /dist
       #     destination: dist
       - run:
+          name: "install docker"
+          command: apk add --update docker openrc
+      - run:
           name: "set version"
           command: timestamp=$(date +%Y%m%d%H%M%S) 
       - run:
