@@ -47,7 +47,7 @@ jobs:
           command: export timestamp=$(date +%Y%m%d%H%M%S)
       - run:
           name: "build image"
-          command: "docker build --tag registry.danielras.com:5443/blog:$timestamp . "
+          command: "echo $timestamp && docker build --tag registry.danielras.com:5443/blog:$timestamp ."
       - deploy:
           name: "Push application Docker image"
           command: |
