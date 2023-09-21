@@ -18,7 +18,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: "install deps"
-          command: "apk add hugo"
+          command: "apk add hugo && apk add go"
       - run:
           name: "build"
           command: "hugo --destination dist"
