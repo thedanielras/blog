@@ -6,9 +6,6 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   build-blog-image-from-src:
-    machine:
-      image: ubuntu-2204:2023.07.1
-    resource_class: arm.medium
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
@@ -30,7 +27,7 @@ jobs:
           command: date +%Y%m%d%H%M%S >>.version
       - run:
           name: "build image"
-          command: "timestamp=$(cat .version | xargs) && docker build --tag registry.danielras.com:5443/blog:$timestamp ."
+          command: "timestamp=$(cat .version | xargs) && docker build --platform linux/arm64 --tag registry.danielras.com:5443/blog:$timestamp ."
       - deploy:
           name: "Push application Docker image"
           command: timestamp=$(cat .version | xargs) && docker push registry.danielras.com:5443/blog:$timestamp
