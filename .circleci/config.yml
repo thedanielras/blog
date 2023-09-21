@@ -27,10 +27,10 @@ jobs:
           command: date +%Y%m%d%H%M%S >>.version
       - run:
           name: "build image"
-          command: "timestamp=$(cat version | xargs) && docker build --tag registry.danielras.com:5443/blog:$timestamp ."
+          command: "timestamp=$(cat .version | xargs) && docker build --tag registry.danielras.com:5443/blog:$timestamp ."
       - deploy:
           name: "Push application Docker image"
-          command: timestamp=$(cat version | xargs) && docker push registry.danielras.com:5443/blog:$timestamp
+          command: timestamp=$(cat .version | xargs) && docker push registry.danielras.com:5443/blog:$timestamp
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
