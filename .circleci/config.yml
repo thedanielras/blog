@@ -10,6 +10,8 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: klakegg/hugo:0.100.2-ext-debian-ci
+    environment:
+      timestamp: $(date +%Y%m%d%H%M%S)
     working_directory: "/src"
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
@@ -40,14 +42,12 @@ jobs:
       - run:
           name: "install docker"
           command: curl -fsSL https://get.docker.com -o get-docker.sh && sh ./get-docker.sh
-      # - run:
-      #     name: "set version"
-      #     command: | 
-      #       echo 'export timestamp=$(date +%Y%m%d%H%M%S)'
-      #       source "$BASH_ENV"
+      - run:
+          name: "set version"
+          command: export timestamp=$(date +%Y%m%d%H%M%S)
       - run:
           name: "build image"
-          command: "docker build --tag registry.danielras.com:5443/blog:$(date +%Y%m%d%H%M%S) ."
+          command: "docker build --tag registry.danielras.com:5443/blog:$timestamp . "
       - deploy:
           name: "Push application Docker image"
           command: |
