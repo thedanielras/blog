@@ -24,7 +24,7 @@ jobs:
           command: "hugo --destination dist"
       - run:
           name: "set version"
-          command: $(date +%Y%m%d%H%M%S) >>.version
+          command: date +%Y%m%d%H%M%S >>.version
       - run:
           name: "build image"
           command: "timestamp=$(cat version | xargs) && docker build --tag registry.danielras.com:5443/blog:$timestamp ."
