@@ -9,7 +9,7 @@ jobs:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
-      - image: klakegg/hugo:0.100.2-ext-alpine-ci
+      - image: klakegg/hugo:0.100.2-ext-debian-ci
     working_directory: "/src"
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
@@ -32,8 +32,14 @@ jobs:
       #     path: /dist
       #     destination: dist
       - run:
+          name: "apt update"
+          command: apt update
+      - run:
+          name: "apt install curl"
+          command: apt install curl -y
+      - run:
           name: "install docker"
-          command: apk add --update docker openrc
+          command: curl -fsSL https://get.docker.com -o get-docker.sh && sh ./get-docker.sh
       - run:
           name: "set version"
           command: | 
